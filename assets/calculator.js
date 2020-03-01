@@ -44,7 +44,9 @@ function initializeButtons() {
         break;
 
       case "=":
-        console.log("Equals");
+        button.addEventListener("click", () => {
+          doCalculation();
+        });
         break;
 
       default:
@@ -81,8 +83,27 @@ function setOperator(value) {
     firstNumber: state.displayNumber,
     operator: value
   });
+}
 
-  console.log(state);
+function doCalculation() {
+  let result = "";
+
+  switch (state.operator) {
+    case "+":
+      result = parseInt(state.firstNumber) + parseInt(state.displayNumber);
+      break;
+
+    case "-":
+      result = parseInt(state.firstNumber) - parseInt(state.displayNumber);
+      break;
+
+    default:
+      result = state.firstNumber;
+      break;
+  }
+
+  setState({ displayNumber: result });
+  updateCalculation();
 }
 
 function updateCalculation() {
